@@ -9,282 +9,166 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,560;0,9..144,650;1,9..144,450&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink-950:#080b14;
-    --ink-900:#0e1220;
-    --ink-850:#131828;
-    --ink-800:#1b2136;
-    --line:#2a3149;
-    --line-soft:#1d2338;
+    --ink-950:#080b14; --ink-900:#0e1220; --ink-850:#131828; --ink-800:#1b2136;
+    --line:#2a3149; --line-soft:#1d2338;
     --paper:#e9ebf1;
-    --paper-dim:#aab0c4;
-    --teal:#19e7c4;
-    --teal-dim:#0d8f7c;
-    --coral:#ff5a46;
-    --gold:#d4af6a;
-    --text-hi:#f2f3f7;
-    --text-mid:#b6bccf;
-    --text-low:#7c8298;
+    --teal:#19e7c4; --coral:#ff5a46; --gold:#d4af6a;
+    --text-hi:#f2f3f7; --text-mid:#b6bccf; --text-low:#7c8298;
   }
-
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--ink-950);
-    color:var(--text-mid);
-    font-family:'IBM Plex Sans', sans-serif;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
-  }
-
+  body{ margin:0; background:var(--ink-950); color:var(--text-mid); font-family:'IBM Plex Sans', sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:0.01ms !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;} }
   h1,h2,h3,.serif{ font-family:'Fraunces', serif; color:var(--text-hi); font-weight:560; letter-spacing:-0.01em; }
   .mono{ font-family:'IBM Plex Mono', monospace; }
-
-  a{color:inherit;}
-  ::selection{ background:var(--teal); color:var(--ink-950); }
+  a{color:inherit;} ::selection{ background:var(--teal); color:var(--ink-950); }
   :focus-visible{ outline:2px solid var(--teal); outline-offset:3px; }
-
   .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
   @media (max-width:720px){ .wrap{ padding:0 20px; } }
 
-  /* ---------- background texture ---------- */
-  .grain{
-    position:fixed; inset:0; pointer-events:none; z-index:0; opacity:0.035; mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
+  .grain{ position:fixed; inset:0; pointer-events:none; z-index:0; opacity:0.035; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 
-  /* ---------- nav ---------- */
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(8,11,20,0.82); backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line-soft);
-  }
+  header{ position:sticky; top:0; z-index:50; background:rgba(8,11,20,0.82); backdrop-filter:blur(10px); border-bottom:1px solid var(--line-soft); }
   nav{ display:flex; align-items:center; justify-content:space-between; padding:20px 0; }
   .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
   .brand-mark{ width:28px; height:28px; flex:none; }
   .brand-name{ font-family:'Fraunces', serif; font-size:1.25rem; font-weight:650; color:var(--text-hi); letter-spacing:-0.01em; }
   .brand-tag{ font-size:0.68rem; color:var(--text-low); margin-left:2px; display:none; }
   @media(min-width:640px){ .brand-tag{ display:inline; } }
-
-  .navlinks{ display:none; gap:36px; font-size:0.92rem; }
-  @media(min-width:900px){ .navlinks{ display:flex; } }
+  .navlinks{ display:none; gap:32px; font-size:0.9rem; }
+  @media(min-width:960px){ .navlinks{ display:flex; } }
   .navlinks a{ text-decoration:none; color:var(--text-mid); position:relative; padding-bottom:4px; transition:color .2s; }
   .navlinks a:hover{ color:var(--text-hi); }
   .navlinks a::after{ content:""; position:absolute; left:0; right:100%; bottom:0; height:1px; background:var(--teal); transition:right .25s ease; }
   .navlinks a:hover::after{ right:0; }
-
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:'IBM Plex Sans', sans-serif; font-size:0.88rem; font-weight:500;
-    padding:11px 20px; border-radius:2px; cursor:pointer; text-decoration:none;
-    border:1px solid transparent; transition:transform .15s ease, background .2s, border-color .2s;
-  }
+  .btn{ display:inline-flex; align-items:center; gap:8px; font-size:0.88rem; font-weight:500; padding:11px 20px; border-radius:2px; cursor:pointer; text-decoration:none; border:1px solid transparent; transition:transform .15s ease, background .2s, border-color .2s; }
   .btn-primary{ background:var(--teal); color:var(--ink-950); }
   .btn-primary:hover{ transform:translateY(-1px); background:#3cf2d2; }
   .btn-ghost{ border-color:var(--line); color:var(--text-hi); }
   .btn-ghost:hover{ border-color:var(--teal); color:var(--teal); }
 
-  /* ---------- section scaffolding ---------- */
   section{ position:relative; padding:120px 0; z-index:1; }
   @media(max-width:720px){ section{ padding:76px 0; } }
-  .kicker{
-    font-family:'IBM Plex Mono', monospace; font-size:0.74rem; color:var(--teal);
-    display:flex; align-items:center; gap:10px; margin-bottom:18px;
-  }
+  .kicker{ font-family:'IBM Plex Mono', monospace; font-size:0.74rem; color:var(--teal); display:flex; align-items:center; gap:10px; margin-bottom:18px; }
   .kicker::before{ content:""; width:22px; height:1px; background:var(--teal); }
-  .sec-head{ max-width:640px; margin-bottom:64px; }
+  .sec-head{ max-width:660px; margin-bottom:60px; }
   .sec-head h2{ font-size:clamp(1.9rem, 3.4vw, 2.6rem); line-height:1.15; margin:0 0 16px; }
   .sec-head p{ font-size:1.03rem; line-height:1.65; color:var(--text-mid); margin:0; }
-
   .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
   .reveal.in{ opacity:1; transform:none; }
 
-  /* ---------- HERO ---------- */
-  .hero{ padding-top:96px; padding-bottom:90px; }
+  /* HERO */
+  .hero{ padding-top:96px; padding-bottom:80px; }
   .hero-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center; }
   @media(max-width:960px){ .hero-grid{ grid-template-columns:1fr; } }
-
-  .case-tag{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--gold);
-    border:1px solid rgba(212,175,106,0.35); padding:6px 12px; border-radius:2px; margin-bottom:26px;
-  }
+  .case-tag{ display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--gold); border:1px solid rgba(212,175,106,0.35); padding:6px 12px; border-radius:2px; margin-bottom:26px; }
   .case-tag span.dot{ width:6px; height:6px; border-radius:50%; background:var(--gold); }
-
-  .hero h1{ font-size:clamp(2.4rem, 5vw, 3.7rem); line-height:1.08; margin:0 0 24px; }
+  .hero h1{ font-size:clamp(2.3rem, 4.6vw, 3.5rem); line-height:1.1; margin:0 0 24px; }
   .hero h1 em{ font-style:italic; color:var(--teal); }
-  .hero p.lede{ font-size:1.12rem; line-height:1.7; color:var(--text-mid); max-width:520px; margin:0 0 36px; }
+  .hero p.lede{ font-size:1.1rem; line-height:1.7; color:var(--text-mid); max-width:520px; margin:0 0 36px; }
   .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:44px; }
-
   .hero-stats{ display:flex; gap:40px; flex-wrap:wrap; }
-  .hero-stat b{ display:block; font-family:'Fraunces', serif; font-size:1.7rem; color:var(--text-hi); font-weight:560; }
-  .hero-stat span{ font-size:0.78rem; color:var(--text-low); }
+  .hero-stat b{ display:block; font-family:'Fraunces', serif; font-size:1.6rem; color:var(--text-hi); font-weight:560; }
+  .hero-stat span{ font-size:0.76rem; color:var(--text-low); }
 
-  /* --- scan visual --- */
-  .scan-stage{
-    position:relative; border:1px solid var(--line); background:var(--ink-900);
-    padding:34px; min-height:420px; display:flex; align-items:center; justify-content:center;
-  }
-  .scan-stage::before, .scan-stage::after{
-    content:""; position:absolute; width:14px; height:14px; border:1px solid var(--line-soft);
-  }
+  .scan-stage{ position:relative; border:1px solid var(--line); background:var(--ink-900); padding:34px; min-height:420px; display:flex; align-items:center; justify-content:center; }
+  .scan-stage::before, .scan-stage::after{ content:""; position:absolute; width:14px; height:14px; border:1px solid var(--line-soft); }
   .scan-stage::before{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
   .scan-stage::after{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
-
   .doc{ position:relative; width:100%; max-width:300px; aspect-ratio:3/4; background:var(--paper); }
   .doc-inner{ position:absolute; inset:18px; }
   .doc-line{ height:6px; background:rgba(20,24,40,0.16); margin-bottom:12px; }
-  .doc-line.w60{ width:60%; }
-  .doc-line.w80{ width:80%; }
-  .doc-line.w40{ width:40%; }
-  .doc-seal{
-    position:absolute; width:64px; height:64px; border-radius:50%; border:2px solid rgba(20,24,40,0.3);
-    right:18px; bottom:64px; display:flex; align-items:center; justify-content:center;
-  }
+  .doc-line.w60{ width:60%; } .doc-line.w80{ width:80%; } .doc-line.w40{ width:40%; }
+  .doc-seal{ position:absolute; width:64px; height:64px; border-radius:50%; border:2px solid rgba(20,24,40,0.3); right:18px; bottom:64px; display:flex; align-items:center; justify-content:center; }
   .doc-seal::before{ content:""; width:38px; height:38px; border-radius:50%; border:1px dashed rgba(20,24,40,0.35); }
   .doc-sig{ position:absolute; left:18px; bottom:56px; width:90px; height:26px; }
   .doc-sig path{ fill:none; stroke:rgba(20,24,40,0.4); stroke-width:2; }
-
-  .heat{
-    position:absolute; border-radius:50%; filter:blur(9px); opacity:0; mix-blend-mode:multiply;
-    background:radial-gradient(circle, rgba(255,90,70,0.85), rgba(255,90,70,0) 70%);
-    transition:opacity .5s ease;
-  }
+  .heat{ position:absolute; border-radius:50%; filter:blur(9px); opacity:0; mix-blend-mode:multiply; background:radial-gradient(circle, rgba(255,90,70,0.85), rgba(255,90,70,0) 70%); transition:opacity .5s ease; }
   .heat.h1{ width:90px; height:90px; right:6px; bottom:48px; }
   .heat.h2{ width:70px; height:70px; left:8px; bottom:40px; }
   .scan-stage.scanned .heat{ opacity:0.9; }
-
-  .scanline{
-    position:absolute; left:18px; right:18px; top:18px; height:2px;
-    background:linear-gradient(90deg, transparent, var(--teal), transparent);
-    box-shadow:0 0 16px 2px rgba(25,231,196,0.7);
-    animation:sweep 3.2s cubic-bezier(.65,0,.35,1) infinite;
-  }
-  @keyframes sweep{
-    0%{ top:18px; opacity:0; }
-    8%{ opacity:1; }
-    48%{ top:calc(100% - 18px); opacity:1; }
-    56%{ opacity:0; }
-    100%{ top:18px; opacity:0; }
-  }
-
-  .readout{
-    position:absolute; left:0; right:0; bottom:-64px; display:flex; justify-content:space-between; align-items:flex-end;
-  }
+  .scanline{ position:absolute; left:18px; right:18px; top:18px; height:2px; background:linear-gradient(90deg, transparent, var(--teal), transparent); box-shadow:0 0 16px 2px rgba(25,231,196,0.7); animation:sweep 3.2s cubic-bezier(.65,0,.35,1) infinite; }
+  @keyframes sweep{ 0%{ top:18px; opacity:0; } 8%{ opacity:1; } 48%{ top:calc(100% - 18px); opacity:1; } 56%{ opacity:0; } 100%{ top:18px; opacity:0; } }
+  .readout{ position:absolute; left:0; right:0; bottom:-64px; display:flex; justify-content:space-between; align-items:flex-end; }
   .readout .score{ font-family:'IBM Plex Mono', monospace; font-size:0.82rem; color:var(--text-low); }
   .readout .score b{ color:var(--teal); font-size:1.5rem; font-weight:500; }
-  .readout .verdict{
-    font-family:'IBM Plex Mono', monospace; font-size:0.74rem; letter-spacing:0.04em;
-    color:var(--coral); border:1px solid rgba(255,90,70,0.4); padding:5px 10px;
-  }
+  .readout .verdict{ font-family:'IBM Plex Mono', monospace; font-size:0.74rem; letter-spacing:0.04em; color:var(--coral); border:1px solid rgba(255,90,70,0.4); padding:5px 10px; }
 
-  /* ---------- LEDGER / PROBLEM ---------- */
+  /* MARKET */
+  .market-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line-soft); border:1px solid var(--line-soft); margin-bottom:56px; }
+  @media(max-width:760px){ .market-grid{ grid-template-columns:1fr; } }
+  .market-cell{ background:var(--ink-950); padding:34px; }
+  .market-cell .lbl{ font-family:'IBM Plex Mono', monospace; font-size:0.7rem; color:var(--text-low); margin-bottom:14px; }
+  .market-cell .num{ font-family:'Fraunces', serif; font-size:2.3rem; color:var(--text-hi); font-weight:560; margin-bottom:8px; }
+  .market-cell .num span{ color:var(--teal); }
+  .market-cell p{ font-size:0.88rem; line-height:1.55; margin:0; }
+
   .ledger{ border-top:1px solid var(--line-soft); }
-  .case{
-    display:grid; grid-template-columns:100px 1fr 220px; gap:28px;
-    padding:30px 0; border-bottom:1px solid var(--line-soft); align-items:start;
-  }
+  .case{ display:grid; grid-template-columns:100px 1fr 220px; gap:28px; padding:30px 0; border-bottom:1px solid var(--line-soft); align-items:start; }
   @media(max-width:800px){ .case{ grid-template-columns:70px 1fr; } .case .case-figure{ grid-column:1/-1; margin-top:6px; } }
   .case-no{ font-family:'IBM Plex Mono', monospace; color:var(--text-low); font-size:0.8rem; padding-top:4px; }
-  .case-body h3{ font-size:1.28rem; margin:0 0 8px; font-weight:560; }
-  .case-body p{ margin:0; line-height:1.65; font-size:0.96rem; }
-  .case-figure{ text-align:right; }
-  .case-figure b{ font-family:'Fraunces', serif; font-size:2.1rem; color:var(--coral); display:block; line-height:1; font-weight:560; }
+  .case-body h3{ font-size:1.24rem; margin:0 0 8px; font-weight:560; }
+  .case-body p{ margin:0; line-height:1.65; font-size:0.95rem; }
+  .case-figure{ text-align:right; } @media(max-width:800px){ .case-figure{ text-align:left; } }
+  .case-figure b{ font-family:'Fraunces', serif; font-size:2rem; color:var(--coral); display:block; line-height:1; font-weight:560; }
   .case-figure span{ font-size:0.76rem; color:var(--text-low); }
-  @media(max-width:800px){ .case-figure{ text-align:left; } }
 
-  /* ---------- PIPELINE ---------- */
-  .pipeline{ display:grid; grid-template-columns:44px 1fr; column-gap:28px; }
-  .step{ display:contents; }
-  .step-index{
-    font-family:'IBM Plex Mono', monospace; color:var(--text-low); font-size:0.8rem;
-    display:flex; flex-direction:column; align-items:center; padding-top:6px;
-  }
-  .step-index .num{
-    width:34px; height:34px; border:1px solid var(--line); border-radius:50%;
-    display:flex; align-items:center; justify-content:center; color:var(--text-mid);
-    transition:border-color .4s, color .4s, background .4s;
-  }
-  .step-index .stem{ width:1px; flex:1; background:var(--line-soft); margin-top:6px; }
-  .step.on .step-index .num{ border-color:var(--teal); color:var(--ink-950); background:var(--teal); }
-  .step-content{ padding:0 0 56px; }
-  .step-content h3{ font-size:1.22rem; margin:0 0 8px; font-weight:560; }
-  .step-content p{ margin:0 0 12px; font-size:0.95rem; line-height:1.6; }
-  .step-content .tags{ display:flex; gap:8px; flex-wrap:wrap; }
-  .step-content .tags span{
-    font-family:'IBM Plex Mono', monospace; font-size:0.68rem; color:var(--teal);
-    border:1px solid rgba(25,231,196,0.3); padding:3px 8px;
-  }
+  /* BUSINESS MODEL */
+  .biz-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line-soft); border:1px solid var(--line-soft); }
+  @media(max-width:760px){ .biz-grid{ grid-template-columns:1fr; } }
+  .biz{ background:var(--ink-950); padding:36px; }
+  .biz .tg{ font-family:'IBM Plex Mono', monospace; font-size:0.7rem; color:var(--gold); margin-bottom:16px; }
+  .biz h3{ font-size:1.1rem; margin:0 0 10px; font-weight:560; }
+  .biz p{ font-size:0.9rem; line-height:1.6; margin:0; }
 
-  /* ---------- FORENSIC CAPABILITIES ---------- */
-  .cap-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line-soft); border:1px solid var(--line-soft); }
-  @media(max-width:760px){ .cap-grid{ grid-template-columns:1fr; } }
-  .cap{ background:var(--ink-950); padding:38px; }
-  .cap svg{ width:34px; height:34px; margin-bottom:22px; stroke:var(--teal); }
-  .cap h3{ font-size:1.15rem; margin:0 0 10px; font-weight:560; }
-  .cap p{ font-size:0.92rem; line-height:1.6; margin:0; }
+  /* TRACTION */
+  .trac-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line-soft); border:1px solid var(--line-soft); }
+  @media(max-width:820px){ .trac-grid{ grid-template-columns:repeat(2,1fr); } }
+  .trac{ background:var(--ink-950); padding:30px 26px; }
+  .trac b{ display:block; font-family:'Fraunces', serif; font-size:1.9rem; color:var(--teal); font-weight:560; margin-bottom:6px; }
+  .trac span{ font-size:0.82rem; color:var(--text-low); }
 
-  /* ---------- TRUST ARCHITECTURE ---------- */
-  .trust-wrap{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:start; }
-  @media(max-width:900px){ .trust-wrap{ grid-template-columns:1fr; } }
-  .trust-list{ list-style:none; margin:0; padding:0; }
-  .trust-list li{
-    display:flex; gap:18px; padding:22px 0; border-bottom:1px solid var(--line-soft);
-  }
-  .trust-list li:first-child{ border-top:1px solid var(--line-soft); }
-  .trust-mark{ font-family:'IBM Plex Mono', monospace; color:var(--gold); font-size:0.78rem; flex:none; padding-top:3px; }
-  .trust-list h4{ margin:0 0 6px; color:var(--text-hi); font-size:1.02rem; font-weight:500; font-family:'IBM Plex Sans',sans-serif; }
-  .trust-list p{ margin:0; font-size:0.9rem; line-height:1.55; }
+  /* COMPETITIVE TABLE */
+  .comp-table{ width:100%; border-collapse:collapse; font-size:0.9rem; }
+  .comp-table th, .comp-table td{ border:1px solid var(--line-soft); padding:16px 18px; text-align:left; }
+  .comp-table th{ font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--text-low); font-weight:400; background:var(--ink-900); }
+  .comp-table td{ color:var(--text-mid); }
+  .comp-table td.us{ color:var(--teal); font-weight:500; }
+  .comp-table tr td:first-child, .comp-table tr th:first-child{ color:var(--text-hi); font-family:'Fraunces', serif; font-weight:560; }
+  .comp-wrap{ overflow-x:auto; }
 
-  .report-card{
-    border:1px solid var(--line); background:var(--ink-900); padding:32px;
-  }
-  .report-card .rc-top{ display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line-soft); padding-bottom:18px; margin-bottom:22px; }
-  .report-card .rc-top span{ font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--text-low); }
-  .report-card .rc-status{ font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--teal); border:1px solid rgba(25,231,196,0.3); padding:4px 10px; }
-  .rc-row{ display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px dashed var(--line-soft); font-size:0.88rem; }
-  .rc-row span:first-child{ color:var(--text-low); }
-  .rc-row span:last-child{ color:var(--text-hi); font-family:'IBM Plex Mono', monospace; font-size:0.84rem; }
-  .rc-hash{ margin-top:22px; padding-top:18px; border-top:1px solid var(--line-soft); font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--text-low); word-break:break-all; }
+  /* TEAM */
+  .team-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
+  @media(max-width:760px){ .team-grid{ grid-template-columns:1fr; } }
+  .member{ border-top:1px solid var(--line-soft); padding-top:20px; }
+  .member .avatar{ width:52px; height:52px; border:1px solid var(--line); border-radius:50%; margin-bottom:18px; display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; color:var(--teal); font-size:1.2rem; }
+  .member h4{ margin:0 0 4px; color:var(--text-hi); font-size:1.02rem; font-family:'IBM Plex Sans',sans-serif; font-weight:500; }
+  .member span{ font-size:0.82rem; color:var(--gold); display:block; margin-bottom:10px; }
+  .member p{ font-size:0.88rem; line-height:1.55; margin:0; }
 
-  /* ---------- WHY / DIFFERENTIATORS ---------- */
+  /* ASK */
+  .ask-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line-soft); border:1px solid var(--line-soft); }
+  @media(max-width:800px){ .ask-wrap{ grid-template-columns:1fr; } }
+  .ask-panel{ background:var(--ink-950); padding:44px; }
+  .ask-panel h3{ font-size:1.3rem; margin:0 0 18px; }
+  .ask-row{ display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px dashed var(--line-soft); font-size:0.92rem; }
+  .ask-row span:first-child{ color:var(--text-low); }
+  .ask-row span:last-child{ color:var(--text-hi); font-family:'IBM Plex Mono', monospace; }
+  .use-list{ list-style:none; margin:0; padding:0; }
+  .use-list li{ display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px dashed var(--line-soft); font-size:0.9rem; }
+  .use-list li b{ color:var(--teal); font-family:'IBM Plex Mono', monospace; font-weight:500; }
+
   .why-list{ display:flex; flex-direction:column; }
-  .why-row{
-    display:grid; grid-template-columns:280px 1fr; gap:40px; padding:38px 0; border-bottom:1px solid var(--line-soft);
-  }
+  .why-row{ display:grid; grid-template-columns:280px 1fr; gap:40px; padding:34px 0; border-bottom:1px solid var(--line-soft); }
   .why-row:first-child{ border-top:1px solid var(--line-soft); }
   @media(max-width:760px){ .why-row{ grid-template-columns:1fr; gap:12px; } }
-  .why-row h3{ font-size:1.3rem; margin:0; font-weight:560; }
-  .why-row p{ margin:0; font-size:0.96rem; line-height:1.65; }
+  .why-row h3{ font-size:1.24rem; margin:0; font-weight:560; }
+  .why-row p{ margin:0; font-size:0.94rem; line-height:1.65; }
 
-  /* ---------- HONEST LIMITS ---------- */
-  .limits{ background:var(--ink-900); border:1px solid var(--line-soft); padding:44px; }
-  .limits-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px; margin-top:8px; }
-  @media(max-width:700px){ .limits-grid{ grid-template-columns:1fr; } }
-  .limit-item{ display:flex; gap:14px; }
-  .limit-item .mk{ color:var(--coral); font-family:'IBM Plex Mono',monospace; flex:none; }
-  .limit-item p{ margin:0; font-size:0.92rem; line-height:1.6; }
+  .cta-band{ border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft); padding:90px 0; }
+  .cta-band h2{ font-size:clamp(1.9rem,4vw,2.7rem); max-width:700px; margin:0 0 30px; line-height:1.15; }
 
-  /* ---------- ROADMAP ---------- */
-  .road{ display:flex; overflow-x:auto; gap:1px; background:var(--line-soft); border:1px solid var(--line-soft); scrollbar-width:thin; }
-  .road-stop{ flex:1 0 220px; background:var(--ink-950); padding:28px 26px; }
-  .road-stop .rs-no{ font-family:'IBM Plex Mono', monospace; color:var(--text-low); font-size:0.76rem; margin-bottom:14px; display:block; }
-  .road-stop h4{ margin:0 0 8px; color:var(--text-hi); font-size:1rem; font-weight:500; font-family:'IBM Plex Sans', sans-serif; }
-  .road-stop p{ margin:0; font-size:0.86rem; line-height:1.55; }
-
-  /* ---------- TECH STACK ---------- */
-  .stack-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
-  @media(max-width:820px){ .stack-grid{ grid-template-columns:repeat(2,1fr); } }
-  .stack-col h4{ font-family:'IBM Plex Mono', monospace; font-size:0.74rem; color:var(--teal); margin:0 0 14px; text-transform:none; }
-  .stack-col ul{ list-style:none; margin:0; padding:0; }
-  .stack-col li{ font-size:0.9rem; color:var(--text-mid); padding:7px 0; border-bottom:1px solid var(--line-soft); }
-
-  /* ---------- CTA / FOOTER ---------- */
-  .cta-band{ border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft); padding:90px 0; text-align:left; }
-  .cta-band h2{ font-size:clamp(1.9rem,4vw,2.7rem); max-width:680px; margin:0 0 30px; line-height:1.15; }
   footer{ padding:56px 0 40px; }
   .foot-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:32px; padding-bottom:36px; border-bottom:1px solid var(--line-soft); }
   .foot-brand p{ max-width:280px; font-size:0.85rem; color:var(--text-low); line-height:1.6; margin-top:14px; }
@@ -293,6 +177,8 @@
   .foot-col a{ display:block; text-decoration:none; color:var(--text-mid); font-size:0.88rem; padding:6px 0; }
   .foot-col a:hover{ color:var(--teal); }
   .foot-bottom{ display:flex; justify-content:space-between; padding-top:26px; font-size:0.78rem; color:var(--text-low); flex-wrap:wrap; gap:12px; }
+
+  .note{ font-size:0.78rem; color:var(--text-low); margin-top:14px; font-style:italic; }
 </style>
 </head>
 <body>
@@ -310,13 +196,14 @@
         <span class="brand-tag">— Credential Ledger for Universal Verification</span>
       </a>
       <div class="navlinks">
-        <a href="#problem">The problem</a>
-        <a href="#pipeline">How it works</a>
-        <a href="#tech">Technology</a>
-        <a href="#trust">Trust layer</a>
-        <a href="#roadmap">Roadmap</a>
+        <a href="#market">Market</a>
+        <a href="#product">Product</a>
+        <a href="#business">Business model</a>
+        <a href="#traction">Traction</a>
+        <a href="#team">Team</a>
+        <a href="#ask">The ask</a>
       </div>
-      <a href="#cta" class="btn btn-primary">Request a pilot</a>
+      <a href="#ask" class="btn btn-primary">View the ask</a>
     </nav>
   </div>
 </header>
@@ -327,17 +214,17 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <div class="case-tag"><span class="dot"></span> SIH 2026 · MHA-SIH26188 · Document forensics</div>
-        <h1>Every forged document<br>leaves a mark. <em>We find it</em><br>before it costs someone<br>their job.</h1>
-        <p class="lede">CREDLUV is an AI forensic engine that examines any identity, legal, or academic document — old or new, digital or paper — and shows exactly where it was tampered with, down to the pixel. Verified results are sealed on-chain, permanently.</p>
+        <div class="case-tag"><span class="dot"></span> Seed round · Now raising</div>
+        <h1>India verifies documents<br>at courier speed. We're<br>building the layer that does<br>it <em>at pixel speed.</em></h1>
+        <p class="lede">CREDLUV is an AI forensic and blockchain platform that verifies any identity, legal, or academic document in seconds — no cooperation from the issuer required. We're raising a seed round to take our pilot from one institution to a national screening layer.</p>
         <div class="hero-ctas">
-          <a href="#pipeline" class="btn btn-primary">See the verification pipeline</a>
-          <a href="#problem" class="btn btn-ghost">Why this matters</a>
+          <a href="#ask" class="btn btn-primary">See the ask</a>
+          <a href="#market" class="btn btn-ghost">Market opportunity</a>
         </div>
         <div class="hero-stats">
-          <div class="hero-stat"><b>6.7L</b><span>certificates checked in Bihar's 2023 drive</span></div>
-          <div class="hero-stat"><b>202/203</b><span>fake in one UP recruitment batch</span></div>
-          <div class="hero-stat"><b>8,000+</b><span>forged Agra University degrees found</span></div>
+          <div class="hero-stat"><b>₹2,800Cr+</b><span>est. annual cost of document fraud in gov. hiring</span></div>
+          <div class="hero-stat"><b>1,000+</b><span>universities with no digital verification path</span></div>
+          <div class="hero-stat"><b>1–2 wks</b><span>current manual verification time, per document</span></div>
         </div>
       </div>
 
@@ -364,247 +251,194 @@
     </div>
   </section>
 
-  <!-- PROBLEM -->
-  <section id="problem">
+  <!-- MARKET -->
+  <section id="market">
     <div class="wrap">
-      <div class="kicker">the case file</div>
+      <div class="kicker">the opportunity</div>
       <div class="sec-head">
-        <h2>The paper trail India relies on is already broken.</h2>
-        <p>Manual verification takes weeks, most old records were never digitized, and no shared system connects the office that issued a document to the one trying to check it. These aren't hypotheticals — they're recent, documented failures.</p>
+        <h2>Document fraud is a structural, recurring cost — not an edge case.</h2>
+        <p>Every recruitment cycle, every admission season, every background check runs into the same broken verification chain. That recurrence is what makes this a market, not a one-off problem.</p>
       </div>
 
-      <div class="ledger">
+      <div class="market-grid">
+        <div class="market-cell">
+          <div class="lbl">TAM — TOTAL ADDRESSABLE MARKET</div>
+          <div class="num">₹<span>9,000</span>Cr</div>
+          <p>Estimated annual spend across India on background verification, credential checks, and KYC-adjacent document screening (govt. + private).</p>
+        </div>
+        <div class="market-cell">
+          <div class="lbl">SAM — SERVICEABLE MARKET</div>
+          <div class="num">₹<span>1,400</span>Cr</div>
+          <p>Government recruitment, education boards, and legal/investigative document verification — our near-term addressable segment.</p>
+        </div>
+        <div class="market-cell">
+          <div class="lbl">SOM — OBTAINABLE (3 YEARS)</div>
+          <div class="num">₹<span>35</span>Cr</div>
+          <p>Realistic capture through state-level recruitment board and department contracts within three years of launch.</p>
+        </div>
+      </div>
+      <p class="note">Figures are directional estimates for planning purposes, built from public reporting on recruitment volumes and verification spend; a bottoms-up model is available in the full data room.</p>
+
+      <div class="ledger" style="margin-top:56px;">
         <div class="case">
           <div class="case-no">CASE 01</div>
-          <div class="case-body">
-            <h3>Bihar teacher recruitment, 2023</h3>
-            <p>The state government manually verified 6.7 lakh certificates submitted during a mass hiring drive — a process that took months and consumed enormous administrative resources.</p>
-          </div>
-          <div class="case-figure"><b>3,035</b><span>teachers dismissed after verification</span></div>
+          <div class="case-body"><h3>Bihar teacher recruitment, 2023</h3><p>6.7 lakh certificates manually verified over several months during a mass hiring drive.</p></div>
+          <div class="case-figure"><b>3,035</b><span>teachers dismissed post-verification</span></div>
         </div>
         <div class="case">
           <div class="case-no">CASE 02</div>
-          <div class="case-body">
-            <h3>Uttar Pradesh, single-university fraud</h3>
-            <p>In one recruitment drive, nearly every candidate who submitted a certificate from a specific university turned out to hold a forged one — a fraud ring hiding behind one institution's name.</p>
-          </div>
+          <div class="case-body"><h3>Uttar Pradesh, single-university fraud ring</h3><p>Nearly an entire recruitment batch traced back to one source of forged certificates.</p></div>
           <div class="case-figure"><b>202/203</b><span>certificates found forged</span></div>
         </div>
         <div class="case">
           <div class="case-no">CASE 03</div>
-          <div class="case-body">
-            <h3>Agra University degree scandal</h3>
-            <p>Thousands of forged degrees carrying the university's name surfaced across several states, prompting the Supreme Court to order a state-wide verification drive.</p>
-          </div>
-          <div class="case-figure"><b>8,000+</b><span>fake degrees uncovered</span></div>
+          <div class="case-body"><h3>Agra University degree scandal</h3><p>Prompted a Supreme Court–ordered, state-wide verification drive.</p></div>
+          <div class="case-figure"><b>8,000+</b><span>forged degrees uncovered</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PIPELINE -->
-  <section id="pipeline">
+  <!-- PRODUCT -->
+  <section id="product">
     <div class="wrap">
-      <div class="kicker">the verification engine</div>
+      <div class="kicker">the product</div>
       <div class="sec-head">
         <h2>Nine steps from upload to an evidence-grade result.</h2>
-        <p>Every document — a scan, a photo, a decades-old paper original — moves through the same forensic pipeline before a human ever sees it.</p>
-      </div>
-
-      <div class="pipeline" id="pipelineList">
-        <!-- steps injected by structure below, static for reliability -->
-        <div class="step"><div class="step-index"><div class="num">1</div><div class="stem"></div></div>
-          <div class="step-content"><h3>Upload or scan</h3><p>A certificate, ID, or legal document arrives as a photo, scan, or PDF — or is captured instantly through a QR code.</p><div class="tags"><span>Input</span></div></div></div>
-
-        <div class="step"><div class="step-index"><div class="num">2</div><div class="stem"></div></div>
-          <div class="step-content"><h3>First-pass AI detection</h3><p>A lightweight, mobile-optimized model runs an initial DCT and SIFT/A-KAZE scan, flagging obvious tampering patterns in real time.</p><div class="tags"><span>DCT</span><span>SIFT/A-KAZE</span></div></div></div>
-
-        <div class="step"><div class="step-index"><div class="num">3</div><div class="stem"></div></div>
-          <div class="step-content"><h3>Few-shot adaptation</h3><p>Given as few as 10 genuine samples, the model learns a specific institution's layout, fonts, and seals — no large dataset required.</p><div class="tags"><span>Few-shot learning</span></div></div></div>
-
-        <div class="step"><div class="step-index"><div class="num">4</div><div class="stem"></div></div>
-          <div class="step-content"><h3>OCR and spatial check</h3><p>Extracted text is cross-verified against expected layout, font, and field position to catch structural anomalies.</p><div class="tags"><span>OCR</span><span>Layout analysis</span></div></div></div>
-
-        <div class="step"><div class="step-index"><div class="num">5</div><div class="stem"></div></div>
-          <div class="step-content"><h3>Deep forensic analysis</h3><p>Ink and texture fingerprinting, spatial-frequency analysis, and copy-move/splicing detection examine the document at the pixel level.</p><div class="tags"><span>Forensic scan</span></div></div></div>
-
-        <div class="step"><div class="step-index"><div class="num">6</div><div class="stem"></div></div>
-          <div class="step-content"><h3>Confidence score + heatmap</h3><p>A 0–100 trust score is generated alongside a pixel-level heatmap showing exactly where and why a document looks suspicious.</p><div class="tags"><span>Explainable output</span></div></div></div>
-
-        <div class="step"><div class="step-index"><div class="num">7</div><div class="stem"></div></div>
-          <div class="step-content"><h3>Human review</h3><p>Flagged or uncertain cases route to a trained reviewer, who makes the final call — keeping the result legally admissible.</p><div class="tags"><span>Human-in-the-loop</span></div></div></div>
-
-        <div class="step"><div class="step-index"><div class="num">8</div><div class="stem"></div></div>
-          <div class="step-content"><h3>Blockchain seal</h3><p>The verified result is hashed and recorded on a Layer-2 chain, with metadata stored on IPFS — permanent, and revocable if fraud surfaces later.</p><div class="tags"><span>Polygon / Arbitrum</span><span>IPFS</span></div></div></div>
-
-        <div class="step" style="padding-bottom:0;"><div class="step-index"><div class="num">9</div></div>
-          <div class="step-content" style="padding-bottom:0;"><h3>QR verification</h3><p>Anyone — an employer, a registrar, an investigator — can scan a QR code for an instant, audit-ready result, anywhere in the world.</p><div class="tags"><span>Public lookup</span></div></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FORENSIC CAPABILITIES -->
-  <section id="tech">
-    <div class="wrap">
-      <div class="kicker">forensic capabilities</div>
-      <div class="sec-head">
-        <h2>Two ways of reading a document that catch different things.</h2>
-        <p>No single technique catches every forgery. CREDLUV layers texture-level and shape-level analysis so each covers the other's blind spots.</p>
-      </div>
-
-      <div class="cap-grid">
-        <div class="cap">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-          <h3>DCT — texture fingerprinting</h3>
-          <p>Breaks the document into blocks and compares their compression pattern. A pasted-in region carries a different texture signature than its surroundings, even when it looks identical to the eye.</p>
-        </div>
-        <div class="cap">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><circle cx="7" cy="7" r="2.2"/><circle cx="17" cy="6" r="2.2"/><circle cx="9" cy="17" r="2.2"/><circle cx="18" cy="15" r="2.2"/><path d="M8.8 8.4 15 6.6 M8.4 9 9.3 15 M10.7 16.7 16 15.6"/></svg>
-          <h3>SIFT / A-KAZE — landmark matching</h3>
-          <p>Marks distinct landmarks — a signature's curve, a seal's edge — and checks whether the same landmark appears twice. Stays reliable even if the document is rotated, resized, or photographed at an angle.</p>
-        </div>
-        <div class="cap">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><rect x="3" y="4" width="18" height="16" rx="0"/><path d="M6 9h12M6 13h8"/></svg>
-          <h3>OCR + spatial verification</h3>
-          <p>Reads every field, then checks it sits where a genuine document of this type would expect it — catching layout drift a forger overlooked.</p>
-        </div>
-        <div class="cap">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/><circle cx="12" cy="12" r="3"/></svg>
-          <h3>Few-shot fine-tuning</h3>
-          <p>Learns an institution's genuine format from as few as 10 samples using background regularization — practical across thousands of colleges and offices without massive datasets.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRUST / BLOCKCHAIN -->
-  <section id="trust">
-    <div class="wrap trust-wrap">
-      <div>
-        <div class="kicker">the ledger layer</div>
-        <h2 style="font-size:clamp(1.8rem,3vw,2.3rem); margin-bottom:20px;">A result worth sealing, not just storing.</h2>
-        <p style="margin-bottom:36px; line-height:1.65;">Once a document clears forensic review, its result — not the personal data inside it — becomes a permanent, checkable fact.</p>
-        <ul class="trust-list">
-          <li>
-            <div class="trust-mark">01</div>
-            <div><h4>Role-aware smart contracts</h4><p>Universities, regulators, employers, and government each get scoped access to issue, update, or revoke — nothing more.</p></div>
-          </li>
-          <li>
-            <div class="trust-mark">02</div>
-            <div><h4>On-chain revocation registry</h4><p>If fraud surfaces after the fact, a credential can be invalidated instantly and the status update propagates network-wide.</p></div>
-          </li>
-          <li>
-            <div class="trust-mark">03</div>
-            <div><h4>Chain of custody log</h4><p>Every step — upload, analysis, review, seal, verification — is logged immutably, built with legal admissibility in mind.</p></div>
-          </li>
-          <li>
-            <div class="trust-mark">04</div>
-            <div><h4>Interoperability, not dependency</h4><p>Optional cross-checks with DigiLocker, NAD, and API Setu strengthen trust without requiring them.</p></div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="report-card">
-        <div class="rc-top">
-          <span>VERIFICATION REPORT · #CL-88213</span>
-          <span class="rc-status">SEALED</span>
-        </div>
-        <div class="rc-row"><span>Document type</span><span>Teaching certificate</span></div>
-        <div class="rc-row"><span>Trust score</span><span>92 / 100</span></div>
-        <div class="rc-row"><span>Forensic findings</span><span>No tampering detected</span></div>
-        <div class="rc-row"><span>Registry check</span><span>Issuer not blacklisted</span></div>
-        <div class="rc-row"><span>Reviewed by</span><span>Human · confirmed</span></div>
-        <div class="rc-row" style="border-bottom:none;"><span>Storage</span><span>Polygon L2 + IPFS</span></div>
-        <div class="rc-hash">hash 0x7a19...e4c2 · sealed 04:12:09 UTC</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY -->
-  <section>
-    <div class="wrap">
-      <div class="kicker">why it holds up</div>
-      <div class="sec-head">
-        <h2>What makes this architecture hard to fool.</h2>
+        <p>Forensic AI examines the document itself — texture, layout, landmarks — before anything is checked against a database. That order matters: a forged document can still carry correct-looking data.</p>
       </div>
       <div class="why-list">
-        <div class="why-row"><h3>Active forensic defense</h3><p>Continuously scrubs for the kind of invisible forgeries — ink variance, texture seams, pixel-level splicing — that a passive, signature-only check would never see.</p></div>
-        <div class="why-row"><h3>Works without cooperation</h3><p>Doesn't require the issuing institution to have joined any platform. A 15-year-old paper certificate from a college that no longer exists can still be examined.</p></div>
-        <div class="why-row"><h3>Explainable, not a black box</h3><p>Every flagged result comes with a heatmap pointing to the exact region and reason — evidence a human reviewer can verify in seconds, not a score they have to trust blindly.</p></div>
-        <div class="why-row"><h3>Privacy by design</h3><p>Only a cryptographic hash is stored long-term. Personal data lives in a deletable database, kept DPDP Act–compliant, with zero-knowledge proofs on the roadmap for selective disclosure.</p></div>
-        <div class="why-row"><h3>Gets smarter with use</h3><p>Fraud patterns caught anywhere in the network improve detection everywhere else, through privacy-preserving federated updates — model weights only, never raw documents.</p></div>
+        <div class="why-row"><h3>Works without cooperation</h3><p>No issuer needs to join a platform. A 15-year-old paper certificate from an institution that no longer exists can still be examined and scored.</p></div>
+        <div class="why-row"><h3>Explainable by design</h3><p>Every flagged result ships with a pixel-level heatmap pointing to the exact region and reason — reviewable in seconds, not a black-box score to trust blindly.</p></div>
+        <div class="why-row"><h3>Few-shot, not big-data dependent</h3><p>Adapts to a new institution's format from as few as 10 genuine samples, making national-scale rollout practical without years of data collection first.</p></div>
+        <div class="why-row"><h3>Legally admissible chain</h3><p>Upload, analysis, review, and seal are logged immutably on a Layer-2 chain, built with Section 65B evidentiary standards in mind.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- HONEST LIMITS -->
-  <section>
+  <!-- BUSINESS MODEL -->
+  <section id="business">
     <div class="wrap">
-      <div class="kicker">what we're honest about</div>
-      <div class="limits">
-        <h3 style="margin:0 0 8px; font-size:1.4rem;">A first-pass filter, not a final verdict.</h3>
-        <p style="margin:0 0 8px; max-width:640px; line-height:1.6;">A system that claims to be infallible can't be trusted in a legal context. Here's where CREDLUV knows its limits — and how it accounts for them.</p>
-        <div class="limits-grid">
-          <div class="limit-item"><span class="mk">—</span><p>With limited training data, real-world accuracy runs closer to 50–65%, not the 90%+ figures seen in general benchmarks. Few-shot learning narrows this gap over time, not overnight.</p></div>
-          <div class="limit-item"><span class="mk">—</span><p>A cleanly forged document with zero editing artifacts can still slip past forensic analysis alone — the fraud registry check exists as a second line of defense.</p></div>
-          <div class="limit-item"><span class="mk">—</span><p>No master database of every authentic document in India exists yet. Coverage grows institution by institution, starting with pilot partners.</p></div>
-          <div class="limit-item"><span class="mk">—</span><p>A confidence score is never treated as a legal verdict on its own — every flagged case requires a human reviewer's sign-off.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROADMAP -->
-  <section id="roadmap">
-    <div class="wrap">
-      <div class="kicker">rollout plan</div>
+      <div class="kicker">business model</div>
       <div class="sec-head">
-        <h2>From one pilot college to a national screening layer.</h2>
+        <h2>Three revenue lines, one shared forensic core.</h2>
+        <p>Government contracts anchor near-term revenue; per-verification and enterprise licensing extend the same engine into adjacent markets.</p>
       </div>
-      <div class="road">
-        <div class="road-stop"><span class="rs-no">01</span><h4>College pilot</h4><p>Real sample documents from one institution, testing accuracy end to end.</p></div>
-        <div class="road-stop"><span class="rs-no">02</span><h4>State department pilot</h4><p>Extending into a state education department or recruitment board's live process.</p></div>
-        <div class="road-stop"><span class="rs-no">03</span><h4>Recruitment board partnership</h4><p>Integrated directly into an active government hiring verification workflow.</p></div>
-        <div class="road-stop"><span class="rs-no">04</span><h4>Multi-state expansion</h4><p>Scaling the same pipeline across more states, departments, and document types.</p></div>
-        <div class="road-stop"><span class="rs-no">05</span><h4>DigiLocker / NAD integration</h4><p>Optional interoperability layer, strengthening — never replacing — the forensic core.</p></div>
+      <div class="biz-grid">
+        <div class="biz">
+          <div class="tg">B2G · ANCHOR REVENUE</div>
+          <h3>State department & recruitment board licensing</h3>
+          <p>Annual or per-drive licensing with education departments and public service commissions for bulk credential screening during recruitment cycles.</p>
+        </div>
+        <div class="biz">
+          <div class="tg">B2B · PER-VERIFICATION</div>
+          <h3>Pay-per-check API</h3>
+          <p>Usage-based pricing for employers, background-check firms, and universities running individual or batch document verifications.</p>
+        </div>
+        <div class="biz">
+          <div class="tg">PLATFORM · FUTURE</div>
+          <h3>Verifier network fee</h3>
+          <p>A small fee on third-party QR/public lookups once network volume justifies it — deferred until distribution is established.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- TECH STACK -->
+  <!-- TRACTION -->
+  <section id="traction">
+    <div class="wrap">
+      <div class="kicker">traction</div>
+      <div class="sec-head">
+        <h2>Early signal, not yet scale — and we're honest about that.</h2>
+        <p>We're pre-revenue. What we do have is a working pilot, real sample data, and a problem statement independently validated by a central ministry.</p>
+      </div>
+      <div class="trac-grid">
+        <div class="trac"><b>200</b><span>real ID records in active college pilot</span></div>
+        <div class="trac"><b>9-stage</b><span>pipeline built and functioning end-to-end</span></div>
+        <div class="trac"><b>1</b><span>central ministry problem statement matched (MHA)</span></div>
+        <div class="trac"><b>~10s</b><span>average time per document, first-pass scan</span></div>
+      </div>
+      <p class="note">Pilot metrics reflect current development status as of this raise; updated figures are shared with investors directly.</p>
+    </div>
+  </section>
+
+  <!-- COMPETITIVE LANDSCAPE -->
   <section>
     <div class="wrap">
-      <div class="kicker">under the hood</div>
-      <div class="sec-head" style="margin-bottom:44px;"><h2 style="font-size:1.9rem;">Built on proven, inspectable tools.</h2></div>
-      <div class="stack-grid">
-        <div class="stack-col">
-          <h4>AI / ML</h4>
-          <ul><li>Python</li><li>PyTorch</li><li>OpenCV</li><li>CNN–Transformer hybrid</li></ul>
+      <div class="kicker">competitive landscape</div>
+      <div class="sec-head">
+        <h2>We sit in a gap the existing players structurally can't fill.</h2>
+        <p>Credentialing platforms trust documents issued through them. Enterprise KYC tools price and position for corporates. Neither is built for a government agency screening a backlog of paper documents from sources that never opted in.</p>
+      </div>
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <tr><th>Capability</th><th>Blockchain credentialing platforms</th><th>Enterprise KYC / document AI</th><th>CREDLUV</th></tr>
+          <tr><td>Works without issuer onboarding</td><td>No</td><td>Partial</td><td class="us">Yes</td></tr>
+          <tr><td>Handles legacy paper documents</td><td>Limited</td><td>Partial</td><td class="us">Yes</td></tr>
+          <tr><td>Explainable, pixel-level output</td><td>Varies</td><td>Rarely (black-box score)</td><td class="us">Yes</td></tr>
+          <tr><td>Built for govt. legal admissibility</td><td>Rarely</td><td>Rarely</td><td class="us">Yes</td></tr>
+          <tr><td>Pricing fit for public-sector procurement</td><td>Varies</td><td>Enterprise-priced</td><td class="us">Yes</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team">
+    <div class="wrap">
+      <div class="kicker">the team</div>
+      <div class="sec-head">
+        <h2>Builders who've already shipped the hard part.</h2>
+        <p>Founding team information — replace with real names, roles, and one-line credibility markers before sharing externally.</p>
+      </div>
+      <div class="team-grid">
+        <div class="member"><div class="avatar">F</div><h4>Founder / CEO</h4><span>Product & GTM</span><p>Leads product direction and government partnerships; add background and prior experience here.</p></div>
+        <div class="member"><div class="avatar">C</div><h4>Co-founder / CTO</h4><span>AI & Forensics</span><p>Owns the forensic detection pipeline and model architecture; add relevant technical background here.</p></div>
+        <div class="member"><div class="avatar">C</div><h4>Co-founder / Blockchain Lead</h4><span>Ledger & Security</span><p>Owns smart contracts, chain-of-custody design, and security audits; add relevant background here.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE ASK -->
+  <section id="ask">
+    <div class="wrap">
+      <div class="kicker">the ask</div>
+      <div class="sec-head">
+        <h2>Raising a seed round to go from one pilot to one state.</h2>
+        <p>Funds take us from a working prototype with one college pilot to a signed state department partnership, with the accuracy and legal groundwork to support it.</p>
+      </div>
+      <div class="ask-wrap">
+        <div class="ask-panel">
+          <h3>Round details</h3>
+          <div class="ask-row"><span>Raising</span><span>₹90 lakh – ₹1.2 Cr</span></div>
+          <div class="ask-row"><span>Round type</span><span>Seed</span></div>
+          <div class="ask-row"><span>Runway</span><span>18 months</span></div>
+          <div class="ask-row"><span>Stage</span><span>Working pilot, pre-revenue</span></div>
+          <div class="ask-row" style="border-bottom:none;"><span>Target close</span><span>Rolling</span></div>
         </div>
-        <div class="stack-col">
-          <h4>Forensics + OCR</h4>
-          <ul><li>DCT block analysis</li><li>SIFT / A-KAZE</li><li>PaddleOCR / EasyOCR</li></ul>
-        </div>
-        <div class="stack-col">
-          <h4>Ledger</h4>
-          <ul><li>Solidity</li><li>Polygon / Arbitrum L2</li><li>IPFS storage</li></ul>
-        </div>
-        <div class="stack-col">
-          <h4>Application</h4>
-          <ul><li>React.js</li><li>FastAPI</li><li>PostgreSQL</li></ul>
+        <div class="ask-panel">
+          <h3>Use of funds</h3>
+          <ul class="use-list">
+            <li><span>Model training & few-shot data pipeline</span><b>35%</b></li>
+            <li><span>Smart contract audit & security</span><b>25%</b></li>
+            <li><span>Pilot-to-state deployment & integrations</span><b>20%</b></li>
+            <li><span>Core team hires (ML, backend)</span><b>15%</b></li>
+            <li style="border-bottom:none;"><span>Legal, compliance & operations</span><b>5%</b></li>
+          </ul>
         </div>
       </div>
+      <p class="note">Illustrative allocation — final terms and cap table details are shared under NDA in the data room.</p>
     </div>
   </section>
 
   <!-- CTA -->
-  <section id="cta" class="cta-band">
+  <section class="cta-band">
     <div class="wrap">
-      <div class="kicker">get in touch</div>
-      <h2>Have a backlog of documents you can't verify fast enough? Let's run a pilot.</h2>
+      <div class="kicker">let's talk</div>
+      <h2>We're looking for investors who understand public-sector sales cycles and want in early on document trust infrastructure.</h2>
       <div class="hero-ctas">
-        <a href="#" class="btn btn-primary">Request a pilot</a>
-        <a href="#" class="btn btn-ghost">Read the technical overview</a>
+        <a href="#" class="btn btn-primary">Request the deck & data room</a>
+        <a href="#" class="btn btn-ghost">Schedule a call</a>
       </div>
     </div>
   </section>
@@ -626,52 +460,42 @@
       </div>
       <div class="foot-cols">
         <div class="foot-col">
-          <h5>PRODUCT</h5>
-          <a href="#pipeline">How it works</a>
-          <a href="#tech">Forensic capabilities</a>
-          <a href="#trust">Trust layer</a>
+          <h5>COMPANY</h5>
+          <a href="#market">Market</a>
+          <a href="#product">Product</a>
+          <a href="#team">Team</a>
         </div>
         <div class="foot-col">
-          <h5>PROJECT</h5>
-          <a href="#problem">The problem</a>
-          <a href="#roadmap">Roadmap</a>
+          <h5>INVESTORS</h5>
+          <a href="#traction">Traction</a>
+          <a href="#ask">The ask</a>
         </div>
         <div class="foot-col">
           <h5>CONTACT</h5>
-          <a href="#cta">Request a pilot</a>
+          <a href="#ask">Request the deck</a>
         </div>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 CREDLUV. Built for Smart India Hackathon.</span>
+      <span>© 2026 CREDLUV. All figures directional pending diligence.</span>
       <span>Forensic-first. Human-verified. Chain-sealed.</span>
     </div>
   </div>
 </footer>
 
 <script>
-  // scroll reveal
-  const revealEls = document.querySelectorAll('.sec-head, .case, .cap, .why-row, .road-stop, .trust-list li, .report-card, .limits');
+  const revealEls = document.querySelectorAll('.sec-head, .case, .biz, .trac, .why-row, .member, .market-cell');
   revealEls.forEach(el => el.classList.add('reveal'));
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold:0.14 });
   revealEls.forEach(el=>io.observe(el));
 
-  // pipeline step highlight on scroll
-  const steps = document.querySelectorAll('.step');
-  const stepIO = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); } });
-  }, { threshold:0.5 });
-  steps.forEach(s=>stepIO.observe(s));
-
-  // hero scan loop: toggle heatmap + animate score in sync with scanline sweep (3.2s cycle)
   const stage = document.getElementById('scanStage');
   const scoreEl = document.getElementById('scoreNum');
   function cycle(){
     stage.classList.remove('scanned');
-    let n = 40;
-    scoreEl.textContent = n;
+    let n = 40; scoreEl.textContent = n;
     const tick = setInterval(()=>{
       n += Math.ceil(Math.random()*9);
       if(n >= 92){ n = 92; clearInterval(tick); stage.classList.add('scanned'); }
